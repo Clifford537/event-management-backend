@@ -1,0 +1,289 @@
+name: Organizations
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/organizations
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all organizations'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '[{"id":1,"name":"Test Org","slug":"test-org"}]'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/organizations
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a new organization'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the organization'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: consequatur
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: '{"organization":{"id":1,"name":"Test Org","slug":"test-org"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"The name field is required.","errors":{"name":["The name field is required."]}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/organizations/{slug}'
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get an organization by slug'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the organization'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"organization":{"id":1,"name":"Test Org","slug":"test-org"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message":"Organization not found."}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/organizations/{slug}'
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update an organization'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the organization to update'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The new name of the organization'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: consequatur
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"organization":{"id":1,"name":"Updated Org","slug":"updated-org"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message":"Organization not found."}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"The name field is required.","errors":{"name":["The name field is required."]}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/organizations/{slug}'
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Soft delete an organization'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the organization to delete'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"message":"Organization deleted successfully."}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message":"Organization not found."}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []

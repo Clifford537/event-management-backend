@@ -1,0 +1,178 @@
+name: Attendees
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: 'api/{org_slug}/events/{event_id}/attendees'
+    metadata:
+      groupName: Attendees
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List attendees for an event'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      org_slug:
+        name: org_slug
+        description: 'The slug of the org.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      org_slug: consequatur
+      event_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"attendees":[{"id":1,"event_id":2,"name":"John Doe","email":"john.doe@example.com","phone":"+1234567890"}]}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"error":"Event not found or does not belong to the organization"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/{org_slug}/events/{event_id}/attendees'
+    metadata:
+      groupName: Attendees
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register an attendee for an event'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      org_slug:
+        name: org_slug
+        description: 'The slug of the org.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      org_slug: consequatur
+      event_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the attendee'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'The email of the attendee'
+        required: true
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'The phone number of the attendee'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: consequatur
+      email: qkunze@example.com
+      phone: consequatur
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: '{"attendee":{"id":1,"event_id":2,"name":"John Doe","email":"john.doe@example.com","phone":"+1234567890"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"error":"Event not found or does not belong to the organization"}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: '{"message":"Validation failed.","errors":{...}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
