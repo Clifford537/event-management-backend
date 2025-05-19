@@ -1,61 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Multi-Tenant Event Management API (Laravel Backend)
 
-## About Laravel
+## Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This backend API is built with Laravel 8.2+ and serves a multi-tenant event management system.  
+Each organization has isolated data accessed via path-based routing using organization slugs.  
+Admins can manage organizations, events, and attendees securely.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- Organizations management with data isolation  
+- CRUD for Events and Attendees scoped to organizations  
+- Admin authentication via email/password (Laravel Sanctum)  
+- Multi-tenancy enforced through middleware and route scoping  
+- Soft deletes support for events and attendees  
+- Activity logging for event changes  
+- RESTful API endpoints  
+- Test coverage for core features  
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Technology Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel 8.2 or higher  
+- PHP 7.4+ (preferably PHP 8+)  
+- MySQL or PostgreSQL  
+- Laravel Sanctum for authentication  
+- PHPUnit for testing  
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Setup Instructions
 
-### Premium Partners
+1. Clone the repository to your local machine:  
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
+2. Install PHP dependencies:  
+   ```bash
+   composer install
+   ```
+3. Copy the example environment file and update variables:  
+   ```bash
+   cp .env.example .env
+   ```
+   Update the `.env` file, especially database credentials.  
+4. Generate the application key:  
+   ```bash
+   php artisan key:generate
+   ```
+5. Run database migrations:  
+   ```bash
+   php artisan migrate
+   ```
+6. Seed the database (optional):  
+   ```bash
+   php artisan db:seed
+   ```
+7. Start the development server:  
+   ```bash
+   php artisan serve
+   ```
+   
+The backend API will be available at [http://localhost:8000](http://localhost:8000).
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Database Configuration
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ensure the following variables are set in your `.env` file:
 
-## Code of Conduct
+```env
+DB_CONNECTION=mysql        # or pgsql
+DB_HOST=127.0.0.1
+DB_PORT=3306               # or your PostgreSQL port
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Running Tests
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run all automated tests with:
+
+```bash
+php artisan test
+```
+
+Tests cover organization, event, attendee features, and multi-tenancy verification.
+
+---
+
+## API Routes Overview
+
+| Route                                            | Description                     |
+| ------------------------------------------------|--------------------------------|
+| `/api/login`                                     | Admin login                    |
+| `/api/logout`                                    | Admin logout                   |
+| `/api/organizations`                             | Manage organizations           |
+| `/api/{organization_slug}/events`                | Manage events within an organization |
+| `/api/{organization_slug}/events/{event_id}/attendees` | Manage attendees for an event  |
+
+---
+
+## Authentication & Authorization
+
+- Uses Laravel Sanctum for API token-based authentication.  
+- Admins are scoped to their organization; access to data outside the organization returns 404.  
+
+---
+
+## Multi-Tenancy
+
+- Path-based routing using organization slug in the URL to isolate data.  
+- Middleware extracts organization slug and restricts queries accordingly.  
+
+---
+
+## Soft Deletes and Logging
+
+- Events and attendees support soft deletes to allow recovery.  
+- Event changes are logged for audit purposes.  
+
+---
+
+## Deployment
+
+- Deploy on any PHP-compatible web server.  
+- Configure `.env` appropriately for production.  
+- Use HTTPS and proper CORS settings to connect with frontend.  
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
