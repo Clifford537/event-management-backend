@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This backend API is built with Laravel 8.2+ and serves a multi-tenant event management system.  
+This backend API is built with Laravel 12 and serves a multi-tenant event management system.  
 Each organization has isolated data accessed via path-based routing using organization slugs.  
 Admins can manage organizations, events, and attendees securely.
 
