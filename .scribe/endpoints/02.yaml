@@ -1,16 +1,16 @@
-name: Events
+name: Attendees
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/{org_slug}/events'
+    uri: 'api/{org_slug}/events/{event_id}/attendees'
     metadata:
-      groupName: Events
+      groupName: Attendees
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List events for an organization'
+      title: 'List attendees for an event'
       description: ''
       authenticated: true
       custom: []
@@ -29,8 +29,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       org_slug: consequatur
+      event_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -39,13 +50,13 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"events":[{"id":1,"organization_id":2,"title":"Org3 Event","description":"Description","date":"2025-05-21","venue":"Venue"}]}'
+        content: '{"attendees":[{"id":1,"event_id":2,"name":"John Doe","email":"john.doe@example.com","phone":"+1234567890"}]}'
         headers: []
         description: ''
         custom: []
       -
         status: 404
-        content: '{"error":"Organization not found"}'
+        content: '{"error":"Event not found or does not belong to the organization"}'
         headers: []
         description: ''
         custom: []
@@ -61,13 +72,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/{org_slug}/events'
+    uri: 'api/{org_slug}/events/{event_id}/attendees'
     metadata:
-      groupName: Events
+      groupName: Attendees
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create a new event'
+      title: 'Register an attendee for an event'
       description: ''
       authenticated: true
       custom: []
@@ -86,75 +97,46 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-    cleanUrlParameters:
-      org_slug: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      title:
-        name: title
-        description: 'The title of the event'
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
         required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the event'
-        required: false
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      date:
-        name: date
-        description: 'The date of the event (YYYY-MM-DD)'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      venue:
-        name: venue
-        description: 'The venue of the event'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      price:
-        name: price
-        description: 'The price of the event'
-        required: false
-        example: consequatur
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      max_attendees:
-        name: max_attendees
-        description: 'The max number of attendees'
-        required: true
-        example: 17
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      status:
-        name: status
-        description: 'The status of the event (draft, published, cancelled)'
-        required: false
+    cleanUrlParameters:
+      org_slug: consequatur
+      event_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the attendee'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'The email of the attendee'
+        required: true
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'The phone number of the attendee'
+        required: true
         example: consequatur
         type: string
         enumValues: []
@@ -162,24 +144,20 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: consequatur
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
-      date: consequatur
-      venue: consequatur
-      price: consequatur
-      max_attendees: 17
-      status: consequatur
+      name: consequatur
+      email: qkunze@example.com
+      phone: consequatur
     fileParameters: []
     responses:
       -
         status: 201
-        content: '{"event":{...}}'
+        content: '{"attendee":{"id":1,"event_id":2,"name":"John Doe","email":"john.doe@example.com","phone":"+1234567890"}}'
         headers: []
         description: ''
         custom: []
       -
-        status: 403
-        content: '{"error":"Unauthorized"}'
+        status: 404
+        content: '{"error":"Event not found or does not belong to the organization"}'
         headers: []
         description: ''
         custom: []
@@ -201,13 +179,13 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/{org_slug}/events/{id}'
+    uri: 'api/{org_slug}/events/{event_id}/attendees/{id}'
     metadata:
-      groupName: Events
+      groupName: Attendees
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get a specific event by ID'
+      title: 'Get details of an attendee'
       description: ''
       authenticated: true
       custom: []
@@ -226,9 +204,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
-        description: 'The ID of the event.'
+        description: 'The ID of the attendee.'
         required: true
         example: 1
         type: integer
@@ -238,6 +226,7 @@ endpoints:
         custom: []
     cleanUrlParameters:
       org_slug: consequatur
+      event_id: 1
       id: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -247,19 +236,13 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"event":{...}}'
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 403
-        content: '{"error":"Unauthorized"}'
+        content: '{"attendee":{...}}'
         headers: []
         description: ''
         custom: []
       -
         status: 404
-        content: '{"message":"Event not found."}'
+        content: '{"error":"Attendee not found or does not belong to the event/organization"}'
         headers: []
         description: ''
         custom: []
@@ -276,13 +259,13 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/{org_slug}/events/{id}'
+    uri: 'api/{org_slug}/events/{event_id}/attendees/{id}'
     metadata:
-      groupName: Events
+      groupName: Attendees
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update an existing event'
+      title: "Update an attendee's information"
       description: ''
       authenticated: true
       custom: []
@@ -301,9 +284,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
-        description: 'The ID of the event.'
+        description: 'The ID of the attendee.'
         required: true
         example: 1
         type: integer
@@ -313,73 +306,34 @@ endpoints:
         custom: []
     cleanUrlParameters:
       org_slug: consequatur
+      event_id: 1
       id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      title:
-        name: title
-        description: 'The title of the event'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the event'
-        required: false
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      date:
-        name: date
-        description: 'The date of the event (YYYY-MM-DD)'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      venue:
-        name: venue
-        description: 'The venue of the event'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      price:
-        name: price
-        description: 'The price of the event'
+      name:
+        name: name
+        description: 'The name of the attendee'
         required: false
         example: consequatur
-        type: numeric
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      max_attendees:
-        name: max_attendees
-        description: 'The max number of attendees'
-        required: true
-        example: 17
-        type: integer
+      email:
+        name: email
+        description: 'The email of the attendee'
+        required: false
+        example: qkunze@example.com
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      status:
-        name: status
-        description: 'The status of the event (draft, published, cancelled)'
+      phone:
+        name: phone
+        description: 'The phone number of the attendee'
         required: false
         example: consequatur
         type: string
@@ -388,24 +342,20 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: consequatur
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
-      date: consequatur
-      venue: consequatur
-      price: consequatur
-      max_attendees: 17
-      status: consequatur
+      name: consequatur
+      email: qkunze@example.com
+      phone: consequatur
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"event":{...}}'
+        content: '{"attendee":{...}}'
         headers: []
         description: ''
         custom: []
       -
-        status: 403
-        content: '{"error":"Unauthorized"}'
+        status: 404
+        content: '{"error":"Attendee not found or does not belong to the event/organization"}'
         headers: []
         description: ''
         custom: []
@@ -427,13 +377,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/{org_slug}/events/{id}'
+    uri: 'api/{org_slug}/events/{event_id}/attendees/{id}'
     metadata:
-      groupName: Events
+      groupName: Attendees
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete an event'
+      title: 'Delete an attendee'
       description: ''
       authenticated: true
       custom: []
@@ -452,9 +402,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
-        description: 'The ID of the event.'
+        description: 'The ID of the attendee.'
         required: true
         example: 1
         type: integer
@@ -464,6 +424,7 @@ endpoints:
         custom: []
     cleanUrlParameters:
       org_slug: consequatur
+      event_id: 1
       id: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -473,13 +434,13 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"message":"Event deleted successfully."}'
+        content: '{"message":"Attendee deleted successfully."}'
         headers: []
         description: ''
         custom: []
       -
-        status: 403
-        content: '{"error":"Unauthorized"}'
+        status: 404
+        content: '{"error":"Attendee not found or does not belong to the event/organization"}'
         headers: []
         description: ''
         custom: []
