@@ -36,12 +36,13 @@ Admins can manage organizations, events, and attendees securely.
 
 1. Clone the repository to your local machine:  
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/Clifford537/event-management-api.git
+   cd event-management-api
    ```
 2. Install PHP dependencies:  
    ```bash
    composer install
+   npm install && npm run build
    ```
 3. Copy the example environment file and update variables:  
    ```bash
