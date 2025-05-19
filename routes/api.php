@@ -13,15 +13,20 @@ Route::post('auth/register', [AuthController::class, 'register'])->name('auth.re
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
 
 /*
+ * Public route to list all organizations (no auth required)
+ */
+Route::get('organizations', [OrganizationController::class, 'index'])->name('organizations.index');
+
+/*
  * Authenticated Routes (Admin-only)
  */
 Route::middleware('auth:sanctum')->group(function () {
     // Logout route
     Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    // Organization routes using slug for route model binding
+    // Organization routes except index (index is public now)
     Route::apiResource('organizations', OrganizationController::class)
-        ->only(['index', 'store', 'show', 'update', 'destroy'])
+        ->only(['store', 'show', 'update', 'destroy'])
         ->parameters(['organizations' => 'slug']);
 });
 
