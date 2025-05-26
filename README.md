@@ -24,8 +24,8 @@ Admins can manage organizations, events, and attendees securely.
 
 ## Technology Stack
 
-- Laravel 8.2 or higher  
-- PHP 7.4+ (preferably PHP 8+)  
+- Laravel 12
+- PHP 8.2  
 - MySQL or PostgreSQL  
 - Laravel Sanctum for authentication  
 - PHPUnit for testing  
@@ -66,7 +66,7 @@ Admins can manage organizations, events, and attendees securely.
    php artisan serve
    ```
    
-The backend API will be available at [http://localhost:8000](http://localhost:8000).
+The backend API will be available at [http://localhost:8000/docs/](http://localhost:8000/docs/).
 
 ---
 
